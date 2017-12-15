@@ -13,18 +13,19 @@
 (function () {
     'use strict';
 
-    if (window.location.href.lastIndexOf(window.location.hostname) + window.location.hostname.length + 1 === window.location.href.length) {
+    var loc = window.location;
+    if (loc.href.lastIndexOf(loc.hostname) + loc.hostname.length + 1 === loc.href.length) {
         console.warn("Website main page, bailing");
         return;
     }
-    if (document.images.length === 1 && document.images[0].src === window.location.href) {
+    if (document.images.length === 1 && document.images[0].src === loc.href) {
         console.warn("Image directly opened, bailing");
         return;
     }
 
-    var host = window.location.hostname.indexOf('www.') !== -1
-        ? window.location.hostname.substr(4)
-        : window.location.hostname;
+    var host = loc.hostname.indexOf('www.') !== -1
+        ? loc.hostname.substr(4)
+        : loc.hostname;
 
     function q(selector) {
         return document.querySelector(selector);

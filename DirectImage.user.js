@@ -25,17 +25,13 @@
         ? window.location.hostname.substr(4)
         : window.location.hostname;
 
+    function q(selector) {
+        return document.querySelector(selector);
+    }
+
     const hostActions = {
         'suckmypic.net': '#theImage'
     };
-
-
-    function q(s) {
-        if (document.body) {
-            return document.body.querySelector(s);
-        }
-        return null;
-    }
 
     function extractImage(host) {
         var img = null;

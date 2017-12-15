@@ -31,8 +31,8 @@
         return document.querySelector(selector);
     }
 
-    const imageExtractors = {
-        'ogImage': function(s) {
+    var imageExtractors = {
+        'ogImage': function() {
             var metaTag = q('meta[property="og:image"], [name="og:image"]');
             if (metaTag) {
                 metaTag.src = metaTag.content
@@ -41,7 +41,17 @@
         }
     };
 
-    const hostActions = {
+    /**
+     * Actions per host
+     *
+     * Could be a simple string -> selector which is queried against the document
+     * and needs to match an image
+     *
+     * Otherwise should be an array with the first element being the name of an
+     * extractor callback in `imageExtractors`, and the remaining elements being
+     * passed as arguments
+     */
+    var hostActions = {
         'suckmypic.net': '#theImage',
         'pix.ac': ['ogImage']
     };
@@ -50,7 +60,6 @@
         var img = null;
 
         if (hostActions.hasOwnProperty(host)) {
-            // TODO add callback functions for complex pages
             // this is a shortcut for direct selectors
             if (typeof hostActions[host] === 'string') {
                 img = q(hostActions[host]);

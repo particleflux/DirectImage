@@ -6,7 +6,7 @@
 // @author       particleflux
 // @match        http*://suckmypic.net/*
 // @exclude      http*://suckmypic.net/*.html
-// @match		 http://*.pix.ac/image/*
+// @match        http://*.pix.ac/image/*
 // @grant        none
 // ==/UserScript==
 
@@ -56,6 +56,9 @@
         'pix.ac': ['ogImage']
     };
 
+    /**
+     * Extract the image tag from the page
+     */
     function extractImage(host) {
         var img = null;
 
@@ -75,6 +78,9 @@
         return img;
     }
 
+    /**
+     * Render the page with the image
+     */
     function render(host) {
         var img = extractImage(host);
         if (img && img.src) {
